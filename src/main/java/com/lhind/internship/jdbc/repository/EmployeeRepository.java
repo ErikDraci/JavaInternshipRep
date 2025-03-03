@@ -15,8 +15,8 @@ public class EmployeeRepository implements Repository<Employee, Integer> {
     private static final String SELECT_ALL = "SELECT * FROM employees;";
     private static final String SELECT_BY_ID = "SELECT * FROM employees WHERE employeeNumber = ?;";
     private static final String SELECT_EXISTS = "SELECT COUNT(*) FROM employees WHERE employeeNumber = ?;";
-    private static final String INSERT_EMPLOYEE = "INSERT INTO employees (lastName, firstName, extension, email, officeCode, reportsTo, jobTitle) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_EMPLOYEE = "INSERT INTO employees (employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String UPDATE_EMPLOYEE = "UPDATE employees SET lastName = ?, firstName = ?, extension = ?, email = ?, officeCode = ?, reportsTo = ?, jobTitle = ? " +
             "WHERE employeeNumber = ?;";
     private static final String DELETE_EMPLOYEE = "DELETE FROM employees WHERE employeeNumber = ?;";
@@ -88,13 +88,14 @@ public class EmployeeRepository implements Repository<Employee, Integer> {
         try (final Connection connection = JdbcConnection.connect();
              final PreparedStatement statement = connection.prepareStatement(INSERT_EMPLOYEE, Statement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(1, employee.getLastName());
-            statement.setString(2, employee.getFirstName());
-            statement.setString(3, employee.getExtension());
-            statement.setString(4, employee.getEmail());
-            statement.setString(5, employee.getOfficeCode());
-            statement.setInt(6, employee.getReportsTo());
-            statement.setString(7, employee.getJobTitle());
+            statement.setInt(1, employee.getEmployeeNumber());
+            statement.setString(2, employee.getLastName());
+            statement.setString(3, employee.getFirstName());
+            statement.setString(4, employee.getExtension());
+            statement.setString(5, employee.getEmail());
+            statement.setString(6, employee.getOfficeCode());
+            statement.setInt(7, employee.getReportsTo());
+            statement.setString(8, employee.getJobTitle());
 
             final int rowsAffected = statement.executeUpdate();
 

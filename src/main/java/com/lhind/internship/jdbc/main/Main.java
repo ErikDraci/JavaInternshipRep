@@ -31,6 +31,7 @@ public class Main {
         // Testing save() - Insert a new employee or update an existing one
         System.out.println("\nSaving a new employee:");
         Employee newEmployee = new Employee();
+        newEmployee.setEmployeeNumber(1800);
         newEmployee.setFirstName("John");
         newEmployee.setLastName("Doe");
         newEmployee.setExtension("x1234");
